@@ -69,81 +69,81 @@ process skesa{
     """
 }
 
-process run_prodigal{
-    tag "$sample_id"
-    publishDir "${params.outdir}/prod_fasta",mode:'copy'
+// process run_prodigal{
+//     tag "$sample_id"
+//     publishDir "${params.outdir}/prod_fasta",mode:'copy'
 
-    input:
-    set val(sample_id), file(assembly) from skesa_output_for_prod
+//     input:
+//     set val(sample_id), file(assembly) from skesa_output_for_prod
 
-    output:
-    set val(sample_id), file("${assembly}_prod.fasta") into prod_fasta
+//     output:
+//     set val(sample_id), file("${assembly}_prod.fasta") into prod_fasta
 
-    when:
-    assembly.size() > 0
+//     when:
+//     assembly.size() > 0
 
-    script:
-    """
-    prodigal -i ${assembly} -p meta -d ${assembly}_prod.fasta
-    """
-}
+//     script:
+//     """
+//     prodigal -i ${assembly} -p meta -d ${assembly}_prod.fasta
+//     """
+// }
 
-process makeblastdb{
+// process makeblastdb{
 
-    tag "$sample_id"
-    publishDir "${params.outdir}/blast_db",mode:'copy'
+//     tag "$sample_id"
+//     publishDir "${params.outdir}/blast_db",mode:'copy'
 
-    input:
-    set val(sample_id),file(assembly) from prod_fasta
+//     input:
+//     set val(sample_id),file(assembly) from prod_fasta
 
-    output:
-    val "${sample_id}_db" into blastdb_name
-    path "${sample_id}_dir" into blastdb_dir
+//     output:
+//     val "${sample_id}_db" into blastdb_name
+//     path "${sample_id}_dir" into blastdb_dir
 
-    when:
-    assembly.size() > 0
+//     when:
+//     assembly.size() > 0
     
-    script:
-    """
-    mkdir ${sample_id}_dir
-    makeblastdb -in ${assembly} -dbtype nucl -out ${sample_id}_dir/${sample_id}_db
-    """
+//     script:
+//     """
+//     mkdir ${sample_id}_dir
+//     makeblastdb -in ${assembly} -dbtype nucl -out ${sample_id}_dir/${sample_id}_db
+//     """
 
 
-}
+// }
 
-process blastrun2{
-    tag "$sample_id"
-    publishDir "${params.outdir}/blast_out_files2",mode:'copy'
+// process blastrun2{
+//     tag "$sample_id"
+//     publishDir "${params.outdir}/blast_out_files2",mode:'copy'
     
-    input:
-    path cpmp from params.references
-    val sample_id_db from blastdb_name 
-    path dbdir from blastdb_dir
+//     input:
+//     path cpmp from params.references
+//     val sample_id_db from blastdb_name 
+//     path dbdir from blastdb_dir
 
-    output:
-    file ("${sample_id_db}.blast")
+//     output:
+//     file ("${sample_id_db}.blast")
 
-    script:
+//     script:
 
-    """
-    blastn -query $cpmp -db $dbdir/$sample_id_db  -outfmt "6 qseqid sseqid pident qlen qstart qend sstart send sseq" -out ${sample_id_db}.blast
-    """
+//     """
+//     blastn -query $cpmp -db $dbdir/$sample_id_db  -outfmt "6 qseqid sseqid pident qlen qstart qend sstart send sseq" -out ${sample_id_db}.blast
+//     """
  
 
-}
-
-// process filteroutput{
-
 // }
 
-// process alginment{
+// // process filteroutput{
 
-// }
+// // }
 
-// process assign_alleles{
+// // process alginment{
 
-// }
+// // }
+
+// // process assign_alleles{
+
+// // }
 
 //value : sampleid, file: paired files, and channel
 //when you run, you can put "-process.echo"and it will show the process

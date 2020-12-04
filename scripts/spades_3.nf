@@ -1,6 +1,7 @@
 //params.reads='/Users/subinpark/fingerprinting/D0/*_{R1,R2}_001.fastq.gz'
 params.reads='/Users/subinpark/NeST_CDC/NeST/input2/*_{R1,R2}_001.fastq.gz'
-params.references='/Users/subinpark/fingerprinting/reference_genes/cpmp_NC_004325.fasta'
+//params.references='/Users/subinpark/fingerprinting/reference_genes/cpmp_NC_004325.fasta'
+params.references1='/Users/subinpark/fingerprinting/reference_genes/psf47_reference.fasta'
 Channel
     .fromFilePairs(params.reads)
     .into {reads_ch; reads_ch2}
@@ -13,7 +14,7 @@ Channel
 // Channel
 //      .fromPath(params.alignments)
 //      .into {alignments_ch; call_genotype_ch}
-params.outdir="individual_whole_test"
+params.outdir="individual_whole_test_psf47"
 
 //type, variable, channel for input and output
 
@@ -130,7 +131,7 @@ process blastrun{
     publishDir "${params.outdir}/blast_out_files",mode:'copy'
     
     input:
-    path cpmp from params.references
+    path cpmp from params.references1
     val sample_id_db from blastdb_name 
     path dbdir from blastdb_dir
 
@@ -145,7 +146,7 @@ process blastrun{
 
     """
     blastn -query $cpmp -db $dbdir/$sample_id_db  -outfmt "6 qseqid sseqid pident qlen qstart qend sstart send sseq" -out ${sample_id_db}.blast
-    cat ${sample_id_db}.blast | awk '\$8-\$7 > 300 {print ">" \$2 "_${sample_id_db}_" "\\n" \$9}' > ${sample_id_db}.fasta
+    cat ${sample_id_db}.blast | awk '\$8-\$7 > 250 {print ">" \$2 "_${sample_id_db}_" "\\n" \$9}' > ${sample_id_db}.fasta
     
     """
 }
@@ -299,7 +300,7 @@ process call_genotype{
     png("cpmp_snp_density.png")
     snpposi.plot(cpmp_snp,codon=TRUE)
     dev.off()
-    obj_cpmp = DNAbin2genind(cpmp_snp, polyThres=0.1)
+    obj_cpmp = DNAbin2genind(cpmp_snp, polyThres=0.05)
     mlg(obj_cpmp)
     genind2genalex(obj_cpmp, filename = "cpmp_genotype_profile.csv", quiet = FALSE,
     pop = NULL, allstrata = TRUE, geo = FALSE, geodf = "xy",overwrite = TRUE,
@@ -318,6 +319,7 @@ process alignment_match_genotype {
     output:
     file("new_name_allele_call.csv")
     file("new_name_allele.csv")
+    //file("allele_profile.csv")
     script:
 
  """
@@ -357,6 +359,8 @@ allele_profile['id']= allele_profile[allele_profile.columns[1:]].apply(
     lambda x: ','.join(x.dropna().astype(str)),
     axis=1
 )
+
+
 allele_profile_table=pd.DataFrame(allele_profile.groupby('id')['Ind'].agg(lambda x:' '.join(x.unique())))
 allele_profile_table=allele_profile_table.reset_index()
 allele_profile_table=allele_profile_table.reset_index()
@@ -364,7 +368,7 @@ allele_profile_table.columns=['unique_id','id','Ind']
 allele_profile_table['new_name']=allele_profile_table.apply(lambda row: "cpmp_" + str(row['unique_id']), axis=1)
 allele_profile_table.to_csv("new_name_allele.csv")
 
-name_allele_map=pd.merge(allele_profile,allele_profile_table,on='id')[['Ind_x','new_name']]
+name_allele_map=pd.merge(allele_profile,allele_profile_table,on='id',how='left')[['Ind_x','new_name']]
 name_allele_map2=name_allele_map
 name_allele_map.columns=['D0_allele','D0_new_name']
 merge1=pd.merge(df,name_allele_map,on='D0_allele',how='left')
