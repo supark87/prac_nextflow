@@ -1,0 +1,4 @@
+#File	19ANBe00D0031PfFxxx0_S7_L001_R1_001.fastq.gz	19ANBe00D0031PfFxxx0_S7_L001_R2_001.fastq.gz
+#Total	21350
+#Matched	0	0.00000%
+#Name	Reads	ReadsPct

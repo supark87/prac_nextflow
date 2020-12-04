@@ -1,0 +1,4 @@
+#File	19ANZa21D0066PfFxxx0_S104_L001_R1_001.fastq.gz	19ANZa21D0066PfFxxx0_S104_L001_R2_001.fastq.gz
+#Total	11632
+#Matched	0	0.00000%
+#Name	Reads	ReadsPct

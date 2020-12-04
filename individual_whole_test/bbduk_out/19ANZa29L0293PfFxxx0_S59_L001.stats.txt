@@ -1,0 +1,4 @@
+#File	19ANZa29L0293PfFxxx0_S59_L001_R1_001.fastq.gz	19ANZa29L0293PfFxxx0_S59_L001_R2_001.fastq.gz
+#Total	14684
+#Matched	0	0.00000%
+#Name	Reads	ReadsPct

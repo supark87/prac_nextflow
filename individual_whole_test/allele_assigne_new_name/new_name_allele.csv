@@ -1,0 +1,21 @@
+,unique_id,id,Ind,new_name
+0,0,"c,a,a,a,a,a,a,g,a",cpmp_1,cpmp_0
+1,1,"c,a,a,a,a,a,a,g,c",cpmp_45,cpmp_1
+2,2,"c,a,a,a,a,a,a,t,a",cpmp_10 cpmp_11 cpmp_19 cpmp_30 cpmp_50,cpmp_2
+3,3,"c,a,a,a,a,a,a,t,c",cpmp_2 cpmp_5 cpmp_16 cpmp_17 cpmp_22 cpmp_32 cpmp_36 cpmp_37 cpmp_39 cpmp_56,cpmp_3
+4,4,"c,a,a,a,a,a,g,g,a",cpmp_15 cpmp_26 cpmp_35,cpmp_4
+5,5,"c,a,a,a,a,a,g,g,c",cpmp_9,cpmp_5
+6,6,"c,a,a,a,a,t,a,t,c",cpmp_4 cpmp_46 cpmp_54 cpmp_57,cpmp_6
+7,7,"c,a,a,a,a,t,g,g,c",cpmp_21 cpmp_38 cpmp_41,cpmp_7
+8,8,"g,g,g,a,c,a,a,t,a",cpmp_29,cpmp_8
+9,9,"g,g,g,a,c,t,g,g,a",cpmp_55,cpmp_9
+10,10,"g,g,g,a,c,t,g,g,c",cpmp_49,cpmp_10
+11,11,"g,g,g,g,c,a,a,g,a",cpmp_14 cpmp_51,cpmp_11
+12,12,"g,g,g,g,c,a,a,t,a",cpmp_12,cpmp_12
+13,13,"g,g,g,g,c,a,a,t,c",cpmp_6 cpmp_25 cpmp_43,cpmp_13
+14,14,"g,g,g,g,c,a,g,g,a",cpmp_24,cpmp_14
+15,15,"g,g,g,g,c,a,g,g,c",cpmp_47,cpmp_15
+16,16,"g,g,g,g,c,t,a,t,a",cpmp_8 cpmp_13,cpmp_16
+17,17,"g,g,g,g,c,t,a,t,c",cpmp_7 cpmp_28 cpmp_40 cpmp_52,cpmp_17
+18,18,"g,g,g,g,c,t,g,g,a",cpmp_27 cpmp_33 cpmp_42 cpmp_44 cpmp_48 cpmp_53,cpmp_18
+19,19,"g,g,g,g,c,t,g,g,c",cpmp_3 cpmp_18 cpmp_20 cpmp_23 cpmp_31 cpmp_34,cpmp_19

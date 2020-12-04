@@ -1,0 +1,4 @@
+#File	19ANLS00L0016PfFxxx0_S83_L001_R1_001.fastq.gz	19ANLS00L0016PfFxxx0_S83_L001_R2_001.fastq.gz
+#Total	9396
+#Matched	0	0.00000%
+#Name	Reads	ReadsPct
